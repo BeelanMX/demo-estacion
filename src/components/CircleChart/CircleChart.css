@@ -1,0 +1,28 @@
+.chartPanel {
+  width: 300px;
+  padding: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0px -2px 47px -10px rgba(0,0,0,0.75);
+}
+.chart {
+  /*border: 1px dotted #ddd;*/
+}
+
+.chart .background {
+  fill: RGB(230, 237, 244)
+}
+
+.chart .foreground {
+  fill: RGB(0, 181, 241)
+}
+
+.chart .label {
+  fill: RGB(0, 181, 241);
+  font: 18px sans-serif;
+  text-anchor: middle;
+  alignment-baseline: middle;
+}
+
+section:nth-child(3) .chart .label {
+  font: 13px sans-serif;
+}

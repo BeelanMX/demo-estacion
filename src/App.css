@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+.App .chartsSections {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
 
 .App-logo {
   height: 80px;
