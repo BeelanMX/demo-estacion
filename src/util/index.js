@@ -61,14 +61,17 @@ var noms = {
   },
 
 }
+function pairsOnArray(str) {
+  var res = [];
 
-function payloadIterator (payload){
-
-  var ob = [];
-  var payloadObjecks= []
-  for (var i = 0, len = payload.length; i < len; i++) {
-    ob.push(payload[i] + payload[++i])
+  for (var i = 0, len = str.length; i < len; i++) {
+    res.push(str[i] + str[++i])
   }
+  return res
+}
+function payloadIterator (payload){
+  var payloadObjecks= []
+  var ob = pairsOnArray(payload)
   for (var j = 1; j < ob.length; j++) {
       var type = noms[ob[j]];
       console.log(type)
@@ -81,7 +84,11 @@ function payloadIterator (payload){
       payloadObjecks.push({ref: ob[j-1] ,type: type.typeId,data: dataPayload});
       j = j + type.dataSize;
   }
-  console.log(payloadObjecks);
+  return payloadObjecks
+}
+function getValue() {
+  let orderObjet = payloadIterator('01027B0C');
+  console.log(orderObjet);
 }
 
-payloadIterator('01027B0C');
+getValue();
