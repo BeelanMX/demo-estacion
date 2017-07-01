@@ -82,7 +82,7 @@ function payloadIterator (payload){
         dataPayload+= ob[k]
       }
       payloadObjecks.push({ref: ob[j-1] ,type: type.typeId,data: dataPayload});
-      j = j + type.dataSize;
+      j = j + 1 + type.dataSize;
   }
   return payloadObjecks
 }
