@@ -8,7 +8,8 @@ class App extends Component {
     super(props)
     this.state = {
       data1: 30,
-      data2: 45.5
+      data2: 45.5,
+      data: '0102XXXX'
     }
   }
   render() {
