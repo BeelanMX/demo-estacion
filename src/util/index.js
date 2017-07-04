@@ -106,46 +106,59 @@ function payloadIterator (payload){
   return payloadObjecks
 }
 function oneValue (data) {
+  let v1 = parseInt(data[1], 16)
   // addDigitalInput addDigitalOutput addPresence
 
   // buffer[cursor++] = channel;
   // buffer[cursor++] = LPP_DIGITAL_INPUT;
   // buffer[cursor++] = value;
-  return data[0];
+  return v1;
 }
 function analogsValue (data) {
+    let v1 = parseInt((data[0]), 16) << 8;
+    let v2 = parseInt(data[1], 16)
   // addAnalogInput addAnalogOutput
   // int16_t val = value * 100;
   // buffer[cursor++] = channel;
   // buffer[cursor++] = LPP_ANALOG_INPUT;
   // buffer[cursor++] = val >> 8;
   // buffer[cursor++] = val;
-  return ((data[0] << 8) + data[1]) / 100;
+  return ((v1 + v2) / 100);
 }
 function Luminosity (data) {
+  let v1 = parseInt((data[0]), 16) << 8;
+  let v2 = parseInt(data[1], 16)
   // addLuminosity
   // buffer[cursor++] = channel;
   //   buffer[cursor++] = LPP_LUMINOSITY;
   //   buffer[cursor++] = lux >> 8;
   //   buffer[cursor++] = lux;
-  return ((data[0] << 8) + data[1])
+  return (v1 + v2)
 }
 function tempPresureValue (data) {
+
+  let v1 = parseInt((data[0]), 16) << 8;
+  let v2 = parseInt(data[1], 16)
+
   // addTemperature                             // addBarometricPressure
   // int16_t val = celsius * 10;              //   int16_t val = hpa * 10;
   // buffer[cursor++] = channel;             // buffer[cursor++] = channel;
   // buffer[cursor++] = LPP_TEMPERATURE;    // buffer[cursor++] = LPP_BAROMETRIC_PRESSURE;
   // buffer[cursor++] = val >> 8;          // buffer[cursor++] = val >> 8;
   // buffer[cursor++] = val;              // buffer[cursor++] = val;
-  return ((data[0] << 8) + data[1]) / 10;
+
+  // now shoul pass strings to Numbers to make de data
+
+  return ( (v1 + v2) / 10);
 }
 
 function RelativeHumidity (data) {
+  let v1 = parseInt((data[0]), 16);
   // addRelativeHumidity
   // buffer[cursor++] = channel;
   // buffer[cursor++] = LPP_RELATIVE_HUMIDITY;
   // buffer[cursor++] = rh * 2;
-  return data[0] / 2
+  return (v1 / 2)
 }
 function Accelerometer() {
   // addAccelerometer
@@ -197,35 +210,35 @@ function GPS() {
   // buffer[cursor++] = alt;
 }
 function getValue() {
-  let orderObjet = payloadIterator('01027B0C050200070171010203040506');
+  let orderObjet = payloadIterator('01027B0C02020000036853046703260502000C0602000C07737BB9080201B409650000');
   for (var i = 0; i < orderObjet.length; i++) {
     switch (orderObjet[i].type) {
       case '00':
-              console.log('DIn',oneValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m DIn',oneValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '01':
-              console.log('DOut', oneValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m DOut', oneValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '66':
-              console.log('presenceSensor',oneValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m presenceSensor',oneValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '02':
-              console.log('analogInput',analogsValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m analogInput',analogsValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '03':
-              console.log('analogOut',analogsValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m analogOut',analogsValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '65':
-              console.log('iluminat', Luminosity(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m iluminat', Luminosity(pairsOnArray(orderObjet[i].data)))
         break;
       case '67':
-              console.log('TEmp', tempPresureValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m TEmp', tempPresureValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '73':
-              console.log('presion',tempPresureValue(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m presion',tempPresureValue(pairsOnArray(orderObjet[i].data)))
         break;
       case '68':
-              console.log('humedy',RelativeHumidity(parseHexString(orderObjet[i].data)))
+              console.log('\x1b[33m%s\x1b[0m humedy',RelativeHumidity(pairsOnArray(orderObjet[i].data)))
         break;
       default:
 
@@ -233,5 +246,8 @@ function getValue() {
   }
   console.log(orderObjet);
 }
-
+// simulatedata console.log('\x1b[45m%s\x1b[0m', base64toHEX('AQJ7DAICAAADaFMEZwMmBQIADAYCAAwHc3u5CAIBtAllAAA') )
 getValue();
+module.exports = {
+  getValue: getValue
+};
