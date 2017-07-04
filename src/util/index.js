@@ -211,8 +211,7 @@ function GPS() {
   // buffer[cursor++] = alt;
 }
 function getValue(payload) {
-  console.log('\x1b[33m%s\x1b[0mpayload', payload);
-  let orderObjet = payloadIterator('01027B0C02020000036853046703260502000C0602000C07737BB9080201B409650000');
+  let orderObjet = payloadIterator(payload);
   console.log(orderObjet);
   for (var i = 0; i < orderObjet.length; i++) {
     switch (orderObjet[i].type) {
@@ -250,7 +249,8 @@ function getValue(payload) {
   return orderObjet
 }
 // simulatedata console.log('\x1b[45m%s\x1b[0m', base64toHEX('AQJ7DAICAAADaFMEZwMmBQIADAYCAAwHc3u5CAIBtAllAAA') )
-getValue();
+// getValue();
 module.exports = {
-  getValue: getValue
+  getValue: getValue,
+  base64toHEX: base64toHEX
 };

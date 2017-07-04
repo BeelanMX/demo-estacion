@@ -1,6 +1,7 @@
 .chartPanel {
   width: 300px;
   padding: 10px 0;
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 0px -2px 47px -10px rgba(0,0,0,0.75);
 }

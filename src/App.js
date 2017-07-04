@@ -5,32 +5,47 @@ import dataFormat from './util'
 import './App.css';
 
 const url = 'http://api.beelan.mx/v1/uplink/1291923847474782';
+
 const options = {
   method: "GET",
   headers: {
-    "Authorization": "4v/LYowF9/Ar5X+B5RfNYafYWh8=",
+    authorization: "4v/LYowF9/Ar5X+B5RfNYafYWh8=",
   }
 }
-
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       data1: 30,
       data2: 45.5,
-      data: '0102XXXX'
+      data: [],
+      refsNames: {
+        '01': 'winddir',
+        '02': 'windspeedmph',
+        '03': 'humidity',
+        '04': 'tempf',
+        '05': 'rainin',
+        '06': 'dailyrainin',
+        '07': 'pressure',
+        '08': 'batt_lvl',
+        '09': 'light_lvl',
+      }
     }
   }
-  getData = () => {
+  componentWillMount() {
+    console.warn(options);
     fetch(url, options)
       .then((res) => res.json())
-      .then((resJson) => console.warn(resJson))
-  }
-  componentWillMount() {
-    this.getData()
+      .then((arrayData) =>  dataFormat.base64toHEX(arrayData[0].data))
+      .then(hexaData => dataFormat.getValue(hexaData))
+      .then(result => this.setState({
+        data: result
+      }))
     // dataFormat.getValue()
   }
   render() {
+    console.warn('ofkoakfoa', this.state);
+    const {data, refsNames} = this.state
     return (
       <div className="App">
         <div className="App-header">
@@ -38,8 +53,11 @@ class App extends Component {
           <h2>Welcome to Beelan Demo</h2>
         </div>
         <div className="chartsSections">
-        <CircleChart refs='one' title='ONE' data={this.state.data1}/>
-        <CircleChart refs='two' title='TwO' data={this.state.data2}/>
+          {
+            data.map((item) => {
+              return <CircleChart refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
+            })
+          }
         </div>
       </div>
     );
