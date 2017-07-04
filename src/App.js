@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import CircleChart from './components/CircleChart'
+import dataFormat from './util'
 import './App.css';
+
+const url = 'http://api.beelan.mx/v1/uplink/1291923847474782';
+const options = {
+  method: "GET",
+  headers: {
+    "Authorization": "4v/LYowF9/Ar5X+B5RfNYafYWh8=",
+  }
+}
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +20,15 @@ class App extends Component {
       data2: 45.5,
       data: '0102XXXX'
     }
+  }
+  getData = () => {
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((resJson) => console.warn(resJson))
+  }
+  componentWillMount() {
+    this.getData()
+    // dataFormat.getValue()
   }
   render() {
     return (

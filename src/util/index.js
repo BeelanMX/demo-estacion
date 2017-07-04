@@ -71,6 +71,7 @@ const base64toHEX = (base64) => {
     const hex = raw.charCodeAt(i).toString(16);
     HEX += (hex.length === 2 ? hex : `0${hex}`);
   }
+
   return HEX.toUpperCase();
 }
 function parseHexString(str) {
@@ -209,42 +210,44 @@ function GPS() {
   // buffer[cursor++] = alt >> 8;
   // buffer[cursor++] = alt;
 }
-function getValue() {
+function getValue(payload) {
+  console.log('\x1b[33m%s\x1b[0mpayload', payload);
   let orderObjet = payloadIterator('01027B0C02020000036853046703260502000C0602000C07737BB9080201B409650000');
+  console.log(orderObjet);
   for (var i = 0; i < orderObjet.length; i++) {
     switch (orderObjet[i].type) {
       case '00':
-              console.log('\x1b[33m%s\x1b[0m DIn',oneValue(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = oneValue(pairsOnArray(orderObjet[i].data))
         break;
       case '01':
-              console.log('\x1b[33m%s\x1b[0m DOut', oneValue(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = oneValue(pairsOnArray(orderObjet[i].data))
         break;
       case '66':
-              console.log('\x1b[33m%s\x1b[0m presenceSensor',oneValue(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = oneValue(pairsOnArray(orderObjet[i].data))
         break;
       case '02':
-              console.log('\x1b[33m%s\x1b[0m analogInput',analogsValue(pairsOnArray(orderObjet[i].data)))
+            orderObjet[i].data = analogsValue(pairsOnArray(orderObjet[i].data))
         break;
       case '03':
-              console.log('\x1b[33m%s\x1b[0m analogOut',analogsValue(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = analogsValue(pairsOnArray(orderObjet[i].data))
         break;
       case '65':
-              console.log('\x1b[33m%s\x1b[0m iluminat', Luminosity(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = Luminosity(pairsOnArray(orderObjet[i].data))
         break;
       case '67':
-              console.log('\x1b[33m%s\x1b[0m TEmp', tempPresureValue(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = tempPresureValue(pairsOnArray(orderObjet[i].data))
         break;
       case '73':
-              console.log('\x1b[33m%s\x1b[0m presion',tempPresureValue(pairsOnArray(orderObjet[i].data)))
+            orderObjet[i].data = tempPresureValue(pairsOnArray(orderObjet[i].data))
         break;
       case '68':
-              console.log('\x1b[33m%s\x1b[0m humedy',RelativeHumidity(pairsOnArray(orderObjet[i].data)))
+              orderObjet[i].data = RelativeHumidity(pairsOnArray(orderObjet[i].data))
         break;
       default:
 
     }
   }
-  console.log(orderObjet);
+  return orderObjet
 }
 // simulatedata console.log('\x1b[45m%s\x1b[0m', base64toHEX('AQJ7DAICAAADaFMEZwMmBQIADAYCAAwHc3u5CAIBtAllAAA') )
 getValue();
