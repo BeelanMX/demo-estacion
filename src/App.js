@@ -4,6 +4,7 @@ import CircleChart from './components/CircleChart';
 import DirectionChar from './components/DirectionChar';
 import dataFormat from './util'
 import TempGraf from './components/TempGraf'
+import PresionChart from './components/PresionChart'
 
 import './App.css';
 
@@ -63,6 +64,9 @@ class App extends Component {
                   break;
                   case '04':
                       return <TempGraf key={i} data={item.data}/>
+                    break;
+                  case '07':
+                      return <PresionChart key={i} title={refsNames[item.ref]}  data={item.data}/>
                     break;
                 default:
                 return <CircleChart key={i} refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
