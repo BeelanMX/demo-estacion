@@ -4,11 +4,11 @@
 
 ## Hardware necesario
   - Arduino UNO
-  - Kit Estación meteorológica
+  - [Kit Estación meteorológica](https://www.sparkfun.com/products/8942)
   - LoRaCatShield por Electronic Cats
 
-## Software necesario
-  - Platformio o Arduino IDE
+## Software recomendado
+  - [Platformio](http://platformio.org/) o [Arduino IDE](https://www.arduino.cc/)
 
 ## Lecturas recomendadas
   [Cayenne Low Power Payload](https://mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload)
