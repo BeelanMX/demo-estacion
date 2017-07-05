@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "atob": "^2.0.3",
+    "d3": "^4.9.1",
     "d3-bar": "^1.8.0",
     "d3-circle": "^1.0.0",
     "react": "^15.6.1",
+    "react-bar-chart": "^0.1.2",
+    "react-d3-components": "^0.6.6",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.9",
     "react-weather": "^0.1.3"

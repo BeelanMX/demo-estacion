@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import CircleChart from './components/CircleChart'
+import CircleChart from './components/CircleChart';
+import DirectionChar from './components/DirectionChar';
 import dataFormat from './util'
+import TempGraf from './components/TempGraf'
+
 import './App.css';
 
 const url = 'http://api.beelan.mx/v1/uplink/1291923847474782';
@@ -44,7 +47,6 @@ class App extends Component {
     // dataFormat.getValue()
   }
   render() {
-    console.warn('ofkoakfoa', this.state);
     const {data, refsNames} = this.state
     return (
       <div className="App">
@@ -54,8 +56,17 @@ class App extends Component {
         </div>
         <div className="chartsSections">
           {
-            data.map((item) => {
-              return <CircleChart refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
+            data.map((item, i) => {
+              switch (item.ref) {
+                case '01':
+                  return <DirectionChar key={i} refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
+                  break;
+                  case '04':
+                      return <TempGraf key={i} data={item.data}/>
+                    break;
+                default:
+                return <CircleChart key={i} refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
+              }
             })
           }
         </div>

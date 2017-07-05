@@ -64,14 +64,14 @@ var noms = {
 
 }
 const base64toHEX = (base64) => {
-  console.log('ENTER base64toHEX');
+  console.log('ENTER base64toHEX', base64);
   const raw = atob(base64);
   let HEX = '';
   for (let i = 0; i < raw.length; i++) {
     const hex = raw.charCodeAt(i).toString(16);
     HEX += (hex.length === 2 ? hex : `0${hex}`);
   }
-
+  console.log('OUT base64toHEX', HEX.toUpperCase());
   return HEX.toUpperCase();
 }
 function parseHexString(str) {
