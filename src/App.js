@@ -5,6 +5,7 @@ import DirectionChar from './components/DirectionChar';
 import dataFormat from './util'
 import TempGraf from './components/TempGraf'
 import PresionChart from './components/PresionChart'
+import SpeedChart from './components/SpeedChart'
 
 import './App.css';
 
@@ -45,8 +46,20 @@ class App extends Component {
       .then(result => this.setState({
         data: result
       }))
+    this.timer = setInterval(() => {
+      fetch(url, options)
+        .then((res) => res.json())
+        .then((arrayData) =>  dataFormat.base64toHEX(arrayData[0].data))
+        .then(hexaData => dataFormat.getValue(hexaData))
+        .then(result => this.setState({
+          data: result
+        }))
+    }, 30000);
     // dataFormat.getValue()
   }
+  componentWillUnmount() {
+  clearInterval(this.timer);
+}
   render() {
     const {data, refsNames} = this.state
     return (
@@ -61,6 +74,9 @@ class App extends Component {
               switch (item.ref) {
                 case '01':
                   return <DirectionChar key={i} refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
+                  break;
+                case '02':
+                  return <SpeedChart key={i} refs={item.ref} title={refsNames[item.ref]} data={item.data}/>
                   break;
                   case '04':
                       return <TempGraf key={i} data={item.data}/>
