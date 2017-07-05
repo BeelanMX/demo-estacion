@@ -1,4 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+![Beelan logo](http://web.beelan.mx/static/media/logo.fa540863.svg)
+
+# Demo Estación meteorologica con BeeLAN
+
+Ejemplo de monitoreo de estación meteorológica en tiempo real, por medio de la red BeeLAN
+
+## Contenido
+  - Ejemplo vizualización de datos en nodejs
+  - Firmware para dispositivo Arduino y estacion meteorológica
+
+## Licencia
+
+MIT
+
+Para mas Información en visita [beelan.mx](http://beelan.mx)
