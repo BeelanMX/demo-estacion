@@ -5,16 +5,11 @@ const margin = {top: 20, right: 20, bottom: 30, left: 40};
 
 const TempGraf = React.createClass({
   getInitialState() {
-    return { width: 300, data:[{text: 'Temperatura', value: 0 }] };
+    return { width: 400, data:[{text: 'Temperatura', value: 0 }] };
   },
   getDefaultProps() {
     return {
       data: 100
-    };
-  },
-  componentDidMount: () => {
-    window.onresize = () => {
-     this.setState({width: this.refs.root.offsetWidth});
     };
   },
 

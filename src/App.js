@@ -14,7 +14,7 @@ const url = 'http://api.beelan.mx/v1/uplink/1291923847474782';
 const options = {
   method: "GET",
   headers: {
-    authorization: "4v/LYowF9/Ar5X+B5RfNYafYWh8=",
+    authorization: "GIPLte7bPxW3UkTwacVfM7kNvwE=",
   }
 }
 class App extends Component {
