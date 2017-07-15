@@ -9,12 +9,12 @@ import SpeedChart from './components/SpeedChart'
 
 import './App.css';
 
-const deviceId = "1291923847474782";
+const deviceId = "4201512464211624";
 const url = `http://api.beelan.mx/v1/uplink/${deviceId}`;
 const options = {
   method: "GET",
   headers: {
-    authorization: "GIPLte7bPxW3UkTwacVfM7kNvwE=",
+    authorization: "rpmDTu2rLmyH6NgjGpGs8fubaHg=",
   }
 }
 class App extends Component {
