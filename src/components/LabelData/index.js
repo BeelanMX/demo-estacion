@@ -8,6 +8,11 @@ class LabelData extends Component {
       data: 0
     }
   }
+  componentWillMount() {
+    this.setState({
+      data: this.props.data
+    })
+  }
   componentWillReceiveProps(nextProps) {
     // this.a.update({ value: nextProps.data / 100 })
     this.setState({
