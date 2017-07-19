@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 class PresionChart extends Component {
   componentDidMount() {
-     const total = .1000
     this.a = new Chart({
       target: this.refs[this.props.refs],
       thickness: 4,
@@ -12,10 +11,10 @@ class PresionChart extends Component {
       ease: 'easeElastic',
       duration: 600
     })
-    this.a.render({ value: this.props.data / 10000 })
+    this.a.render({ value: this.props.data / 1000 })
   }
   componentWillReceiveProps(nextProps) {
-    this.a.update({ value: nextProps.data / 10000 })
+    this.a.update({ value: nextProps.data / 1000 })
   }
   render() {
     return (
