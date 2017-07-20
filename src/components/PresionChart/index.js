@@ -7,7 +7,7 @@ class PresionChart extends Component {
     this.a = new Chart({
       target: this.refs[this.props.refs],
       thickness: 4,
-      format: d => `${ d * 10000} hpa`,
+      format: d => `${ d * 1000} hpa`,
       ease: 'easeElastic',
       duration: 600
     })
