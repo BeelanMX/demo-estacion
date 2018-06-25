@@ -90,6 +90,9 @@ volatile float dailyrainin = 0; // [rain inches so far today in local time]
 float pressure = 0;
 //float dewptf; // [dewpoint F] - It's hard to calculate dewpoint locally, do this in the agent
 
+
+uint8_t* cayene = 0;
+uint8_t t = 0;
 float batt_lvl = 11.8; //[analog value from 0 to 1023]
 float light_lvl = 455; //[analog value from 0 to 1023]
 
@@ -465,6 +468,7 @@ void calcWeather()
 
   //Calc battery level
   batt_lvl = get_battery_level();
+
 }
 
 //Returns the voltage of the light sensor based on the 3.3V rail
@@ -596,4 +600,13 @@ void printWeather()
   Serial.print(F(",light_lvl="));
   Serial.println(light_lvl, 2);
   lpp.addLuminosity(9,light_lvl);
+
+  cayene= lpp.getBuffer();
+  t= lpp.getSize();
+
+  Serial.print(F("Buffer= ") );
+  Serial.println(*cayene);
+
+  Serial.print(F("Tamaño= ") );
+  Serial.println(t);
 }
